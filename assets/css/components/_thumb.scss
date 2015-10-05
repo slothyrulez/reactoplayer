@@ -1,0 +1,104 @@
+@charset 'UTF-8';
+
+// VOLUME - THUMB
+
+$thumb-bg: rgba(54, 126, 189, 0.78);
+$thumb-bg-2: rgba(48, 113, 169, 0.78);
+$thumb-bg-3: rgba(42, 100, 149, 0.78);
+
+input[type=range].volume {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 7.3px 0;
+}
+
+input[type=range].volume:focus {
+  outline: none;
+}
+
+input[type=range].volume::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 11.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px $black, 0px 0px 1px #0d0d0d;
+  background: $thumb-bg-2;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+input[type=range].volume::-webkit-slider-thumb {
+  box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
+  border: 1.8px solid #00001e;
+  height: 26px;
+  width: 26px;
+  border-radius: 15px;
+  background: $white;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7.5px;
+}
+
+input[type=range].volume:focus::-webkit-slider-runnable-track {
+  background: $thumb-bg;
+}
+
+input[type=range].volume::-moz-range-track {
+  width: 100%;
+  height: 11.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px $black, 0px 0px 1px #0d0d0d;
+  background: rgba(48, 113, 169, 0.78);
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+
+input[type=range].volume::-moz-range-thumb {
+  box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
+  border: 1.8px solid #00001e;
+  height: 26px;
+  width: 26px;
+  border-radius: 15px;
+  background: $white;
+  cursor: pointer;
+}
+
+input[type=range].volume::-ms-track {
+  width: 100%;
+  height: 11.4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+input[type=range].volume::-ms-fill-lower {
+  background: $thumb-bg-3;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px $black, 0px 0px 1px #0d0d0d;
+}
+
+input[type=range].volume::-ms-fill-upper {
+  background: $thumb-bg;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px $black, 0px 0px 1px #0d0d0d;
+}
+
+input[type=range].volume::-ms-thumb {
+  box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
+  border: 1.8px solid #00001e;
+  height: 26px;
+  width: 26px;
+  border-radius: 15px;
+  background: $white;
+  cursor: pointer;
+  height: 11.4px;
+}
+
+input[type=range].volume:focus::-ms-fill-lower {
+  background: $thumb-bg-2;
+}
+input[type=range].volume:focus::-ms-fill-upper {
+  background: $thumb-bg;
+}

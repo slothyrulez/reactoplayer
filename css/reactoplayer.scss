@@ -1,0 +1,123 @@
+@charset 'UTF-8';
+
+@import 'compass';
+@import 'settings';
+@import 'components/icomoon';
+
+@import 'components/volume';
+
+$charcoal: #555;
+$player-shadow: rgba(20,20,20, .3);
+
+
+$button-wrapper-shadow: inset rgba(0,0,0, .2) 0 5px 6px ;
+$button-shadow: rgba(0,0,0,.4) 0 3px 6px;
+$button-hover-shadow: rgba(0,0,0,.4) 0 3px 8px;
+$button-active-shadow: inset rgba(0,0,0,.5) 0 5px 10px;
+$transparent: rgba(0,0,0, .1);
+.bg-gradient {
+  @include background(linear-gradient(to bottom , $ghost-grey, darken($lightgey, 10%)));
+}
+
+
+// Slider
+$slider-bg-color: $charcoal;
+$slider-color: $white;
+
+// General button style (reset)
+.btn-wrapper {
+  @include background(linear-gradient(top, #999, #d0d0d0 80% ));
+  border-bottom: 2px solid $silver;
+  border-radius: 100%;
+  box-shadow: $button-wrapper-shadow;
+}
+
+.btn {
+  @include background(linear-gradient(top, #eee, #bbb 70%, #9f9f9f 100% ));
+
+  background: none;
+  background-color: $silver;
+  background-position: 0 6px;
+  background-repeat: no-repeat;
+  border: 0;
+  border-radius: 100%;
+  box-shadow: $button-shadow;
+  color: $charcoal;
+  cursor: pointer;
+  left: 0;
+  margin: 0.5em;
+  outline: none;
+  overflow: hidden;
+  padding: 1em;
+  text-transform: uppercase;
+  top: 0;
+  transition: all .1s ease-in;
+
+  &:hover {
+    background-position: 0 0;
+    box-shadow: $button-hover-shadow;
+  }
+
+  &:active {
+    box-shadow: $button-active-shadow;
+  }
+}
+
+body {
+  @extend .bg-gradient;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+
+$player-width: 400px;
+$player-height: 150px;
+$slider-width: 100%;
+
+.demo-position {
+  margin: 0 auto;
+  top: 30vh;
+}
+
+.Player {
+  @extend .bg-gradient;
+  @extend .demo-position;
+
+  @include box-shadow($player-shadow 0px 0px 2em);
+
+  // DEMO
+  border: 1px solid $white;
+  padding: 2em;
+  height: $player-height;
+  width: $player-width;
+  //
+
+  .Buttons {
+    display: flex;
+
+    .player-button-wrapper {
+      display: inline-flex;
+
+      @extend .btn-wrapper;
+      .player-button {
+        @extend .btn;
+      }
+    }
+  }
+
+  .Visor {
+    font-family: "Poppins", sans-serif;
+    font-weight: lighter;
+  }
+
+  .Slider {
+    width: $slider-width;
+    height: 4px;
+    .Track {
+      position: relative;
+    }
+  }
+}
+
+
+// ANIMATIONS

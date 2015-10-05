@@ -1,0 +1,316 @@
+// Fonts library
+
+$icomoonPath: 'assets/fonts/';
+
+@font-face {
+  font-family: 'icoSoonvibe';
+  src:url('#{$icomoonPath}/icoSoonvibe.eot');
+  src:url('#{$icomoonPath}/icoSoonvibe.eot') format('embedded-opentype'),
+  url('#{$icomoonPath}/icoSoonvibe.ttf') format('truetype'),
+  url('#{$icomoonPath}/icoSoonvibe.woff') format('woff'),
+  url('#{$icomoonPath}/icoSoonvibe.svg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"], .icomoon-icon{
+  font-family: 'icoSoonvibe';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  // Better Font Rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  .shim{
+        display: none;
+   }
+}
+
+// Icon sticked in corner of a block element
+.sticked-icon{
+    display: block;
+    position: relative;
+    padding-left: rem-calc(40px);
+    font-family: inherit;
+
+    &[class^="icon-"]:before,
+    &[class*=" icon-"]:before{
+        position: absolute;
+        top: rem-calc(15px);
+        left: rem-calc(15px);
+        font-family: 'icoSoonvibe';
+        //font-size: rem-calc(15px);
+    }
+
+    &>.shim{
+            display: none;
+    }
+}
+
+// Prepend text button with an icon from a class (without <i class="">)
+.button[class^="icon-"], .button[class*=" icon-"] {
+    font-family: inherit;
+
+    &:before{
+        font-family: 'icoSoonvibe';
+        margin-right: rem-calc(5px);
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+
+        /* Better Font Rendering =========== */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+  &.icoAft {
+
+    &:before{
+     position:reltive;
+      right:0.5rem;
+      width:2rem;
+    }
+
+
+  }
+
+}
+
+// Icon Sizes
+.icon-2x{
+    font-size: 2em;
+
+    &.sticked-icon{
+        font-size: inherit;
+        padding-left: 3.5em;
+
+        &[class^="icon-"]:before,
+        &[class*=" icon-"]:before{
+            position: absolute;
+            top: 0.5em;
+            left: 0.5em;
+            font-family: 'icoSoonvibe';
+            font-size: 2em;
+        }
+    }
+
+    &>.shim{
+            display: none;
+    }
+}
+.icon-3x{
+    font-size: 3em;
+
+    &.sticked-icon{
+        font-size: inherit;
+        padding-left: 5.5em;
+
+        &[class^="icon-"]:before,
+        &[class*=" icon-"]:before{
+            position: absolute;
+            top: 0.5em;
+            left: 0.5em;
+            font-family: 'icoSoonvibe';
+            font-size: 3em;
+        }
+    }
+
+    &>.shim{
+            display: none;
+    }
+}
+.icon-4x{
+    font-size: 4em;
+
+    &.sticked-icon{
+        font-size: inherit;
+        padding-left: 6.5em;
+
+        &[class^="icon-"]:before,
+        &[class*=" icon-"]:before{
+            position: absolute;
+            top: 0.5em;
+            left: 0.5em;
+            font-family: 'icoSoonvibe';
+            font-size: 4em;
+        }
+    }
+
+    &>.shim{
+            display: none;
+    }
+}
+.icon-2x-solo {
+  padding-left:3rem;
+  padding-right:1rem;
+  padding-top:1rem;
+  padding-bottom:1rem;
+    &[class^="icon-"]:before,
+    &[class*=" icon-"]:before{
+      font-size: 2rem;
+      position: absolute;
+      top: 0.25em;
+      left: 0.25em;
+      font-family: 'icoSoonvibe';
+  }
+  &.icoAft {
+
+    &[class^="icon-"]:before,
+    &[class*=" icon-"]:before{
+      top: 0.25em;
+      right: 0em;
+      left:auto;
+    }
+  }
+  &.button.go {
+
+    margin-left:1rem;
+    padding-right:3rem;
+    padding-left:1rem;
+    padding-top:1rem;
+    padding-bottom:1rem;
+
+  }
+
+}
+
+
+// take icon by data
+
+*,.icon-2x-solo ,.icon-3x,.icon-4x {
+  position: relative;
+  &[data-icon]:before {
+    top:1rem;
+  font-family: 'icoSoonvibe';
+  content: attr(data-icon);
+  speak: none;
+  line-height: 0;
+
+}
+}
+
+// Icon list
+/*
+ *
+ * HERE GOES THE ICONS FROM THE style.css bundled in the icomoon archive
+ *
+ */
+
+ .icon-p_vol_max:before {
+	content: "\e622";
+}
+.icon-p_vol_low:before {
+	content: "\e623";
+}
+.icon-p_vol_mute:before {
+	content: "\e624";
+}
+.icon-p_vol_inc:before {
+	content: "\e625";
+}
+.icon-p_vol_dec:before {
+	content: "\e626";
+}
+.icon-p_prev:before {
+	content: "\e61e";
+}
+.icon-p_next:before {
+	content: "\e61f";
+}
+.icon-p_play:before {
+	content: "\e618";
+}
+.icon-p_pause:before {
+	content: "\e619";
+}
+.icon-p_stop:before {
+	content: "\e61a";
+}
+.icon-p_backward:before {
+	content: "\e61b";
+}
+.icon-p_forward:before {
+	content: "\e61c";
+}
+.icon-p_volume:before {
+	content: "\e61d";
+}
+.icon-blogEchos:before {
+	content: "\e615";
+}
+.icon-micro:before {
+	content: "\e616";
+}
+.icon-starLight:before {
+	content: "\e617";
+}
+.icon-play:before {
+	content: "\e614";
+}
+.icon-arrow_right:before {
+	content: "\e60f";
+}
+.icon-arrow_left:before {
+	content: "\e610";
+}
+.icon-social:before {
+	content: "\e600";
+}
+.icon-user:before {
+	content: "\e601";
+}
+.icon-upSound:before {
+	content: "\e602";
+}
+.icon-starRate:before {
+	content: "\e603";
+}
+.icon-playlist:before {
+	content: "\e604";
+}
+.icon-listSound:before {
+	content: "\e605";
+}
+.icon-like:before {
+	content: "\e606";
+}
+.icon-home:before {
+	content: "\e607";
+}
+.icon-downSound:before {
+	content: "\e608";
+}
+.icon-conf:before {
+	content: "\e609";
+}
+.icon-blog:before {
+	content: "\e60a";
+}
+.icon-blindSound:before {
+	content: "\e60b";
+}
+.icon-bell:before {
+	content: "\e60c";
+}
+.icon-playlistAdd:before {
+	content: "\e60d";
+}
+.icon-blogInv:before {
+	content: "\e60e";
+}
+.icon-facebook:before {
+	content: "\e611";
+}
+.icon-twit:before {
+	content: "\e612";
+}
+.icon-youtube:before {
+	content: "\e613";
+}

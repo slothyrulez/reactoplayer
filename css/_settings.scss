@@ -1,0 +1,38 @@
+// COLORS
+
+$white       : #FFF;
+$ghost       : #FAFAFA;
+$snow        : #F9F9F9;
+$vapor       : #F6F6F6;
+$white-smoke : #F5F5F5;
+$silver      : #EFEFEF;
+$smoke       : #e6e3e9;
+$lightgey    : #f2f0f4;
+$ghost-grey  : #e6e3e9;
+$gainsboro   : #DDD;
+$iron        : #CCC;
+$base        : #AAA;
+$aluminum    : #999;
+$jumbo       : #888;
+$monsoon     : #777;
+$steel       : #666;
+$charcoal    : #555;
+$tuatara     : #444;
+$oil         : #333;
+$jet         : #191919;
+$black       : #000;
+$red         : #dc2c42;
+$redsoft     : #e5405c;
+$yellow      : #f1bd00;
+
+// We use these as default colors throughout
+$primary-color: #dc2c42;
+// $secondary-color: #e7e7e7;
+// $alert-color: #f04124;
+// $success-color: #43AC6A;
+// $warning-color: #f08a24;
+// $info-color: #a0d3e8;
+
+// We use these to make sure border radius matches unless we want it different.
+$global-radius: 3px;
+$global-rounded: 1000px;
