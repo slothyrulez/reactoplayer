@@ -11,6 +11,7 @@ import Volume from "./Volume.jsx";
 import Visor from "./Visor.jsx";
 import Sound from "./Sound.jsx";
 import { PlayList } from "./Adts.js";
+import Reactosock from "../networking/swamp"
 
 // DEFINITIONS
 export const VOLUME_MAX = 100;
@@ -19,6 +20,8 @@ export const VOLUME_STEP = 2;
 
 export const SERVER_URL = "http://localhost:8000";
 export const SONGS_API_URL = "/api/songs/?format=json";
+export const WS_SERVER_HOST = "localhost:9999";
+export const WS_SERVER_ENDPOINT = "/data";
 
 export default class Player extends React.Component {
   // static propTypes = {
@@ -49,7 +52,7 @@ export default class Player extends React.Component {
         <Buttons onButtonClick={(eve, action) => this.handleClickButton(eve, action) } />
         <Visor {...allprops} />
         <Volume onVolumeChange={(eve) => this.handleVolumeRange(eve)} volume={this.props.volume} />
-        <Sound volume={this.props.volume}/>
+        <Sound volume={this.props.volume} />
       </div>
     );
   }
@@ -81,7 +84,7 @@ export default class Player extends React.Component {
         dispatch(pauseSong(this.playing));
         break;
       case "STOP_SONG":
-        talkToWorker();
+        // talkToWorker();
       default:
         return
     }
@@ -90,18 +93,53 @@ export default class Player extends React.Component {
 }
 
 
-var Worker = require('worker!./song_fetcher_worker.js');
-var worker = new Worker();
-worker.addEventListener('message', function(e) {
-  console.log("FROM W ", e.data);
-}, false);
-console.log("talkToWorker", worker);
+// var Worker = require('worker!./song_fetcher_worker.js');
+// var worker = new Worker();
+// worker.addEventListener('message', function(e) {
+//   console.log("FROM W ", e.data);
+// }, false);
+// console.log("talkToWorker", worker);
+//
+// // talkToWorker
+// function talkToWorker(){
+//   console.log("talkToWorker", worker);
+//   worker.postMessage({'cmd': 'start', 'msg': 'Hi'});
+// }
+//
+import { soundManager } from 'soundmanager2';
+var sm2 = soundManager;
 
-// talkToWorker
-function talkToWorker(){
-  console.log("talkToWorker", worker);
-  worker.postMessage({'cmd': 'start', 'msg': 'Hi'});
+var reactosock = new Reactosock(WS_SERVER_HOST, WS_SERVER_ENDPOINT);
+// console.log(" -> ", reactosock.connection.socket.readyState);
+reactosock.ready(function(){
+  // reactosock.getList("song-router", (...args)=>{console.log("SUCCCES", args)}, (...args)=>{console.log("ERROR ", args)});
+  reactosock.getSingle("song-router", {"id": 12}, fileHandler, ()=>{console.log("ERROR")});
+});
+
+function fileHandler(eve, data){
+  let parsed_data = data.song_file;
+  let cosa = new Uint8Array(parsed_data);
+  console.log("PARSED ", parsed_data, parsed_data.length);
+  console.log("UINT ", cosa, cosa.length);
+  console.log("UINT ", cosa == parsed_data);
+  // let cosa = new Uint8Array(data.song_file);
+  let mime = data.mime_type;
+  let _ab = new ArrayBuffer([cosa.buffer]);
+  let file = new Blob([cosa.buffer], {type : mime });
+  console.log("FILE HANDLER", eve, typeof(data.song_file), cosa, _ab, file);
+  var url = URL.createObjectURL(file);
+  console.log(url);
+  var foo = new Audio(url);
+  console.log(foo);
+
+  console.log(sm2);
+  foo.play();
+  var mysong = sm2.createSound(foo);
+  // mysong.type=mime;
+  // mysong.url = url;
+  mysong.play({volume:10});
 }
+// reactosock.send("foooooo");
 //
 // function fetchSongs(plist) {
 //   fetch(SERVER_URL + SONGS_API_URL, {mode: 'cors'}).then(function(response) {

@@ -5,13 +5,17 @@ export default class Sound extends React.Component {
   constructor(props){
     super(props);
     this.sm2 = soundManager;
-    this.playing = false;
+    this.playing;
+    this.volume;
   }
   is_ok() {
     return this.sm2.ok();
   }
   is_palying() {
     return this.playing;
+  }
+  play() {
+
   }
   render() {
     return <noscript />;
