@@ -1,16 +1,17 @@
 import * as actions from './actions';
-import { VOLUME_MIN, VOLUME_STEP, VOLUME_MAX } from "./components/Player";
+import * as network from './actions_network';
+import { VOLUME_MIN, VOLUME_STEP, VOLUME_MAX } from "./settings";
 
 const initialState = {
   volume: VOLUME_MIN,
   playing: false,
   playlist: [],
-  actualsong: 0,
+  actualSong: undefined,
   fetching: false,
+  fetchingData: false,
 };
 
 function VolumeReducer(state, action) {
-  console.log(action);
   switch (action.type) {
     case actions.VOL_CHG:
       return action.num;
@@ -50,7 +51,7 @@ function get_song(list, actual){
 }
 
 function SongMoveReducer(state, action) {
-  let actual = state.actualsong;
+  let actual = state.actualSong;
   let list = state.playlist;
   switch (action.type) {
     case actions.NEXT_SONG:
@@ -58,7 +59,7 @@ function SongMoveReducer(state, action) {
     case actions.PREV_SONG:
       return get_prev(list, actual);
     default:
-      return state.actualsong;
+      return state.actualSong;
   }
 }
 
@@ -67,9 +68,9 @@ function PlayingReducer(state, action) {
 }
 
 function FetchingReducer(state, action) {
-  if (action.type === actions.SONGS_ENDFETCH) {
+  if (action.type === network.SONGS_ENDFETCH) {
     return false;
-  } else if (action.type === actions.SONGS_FETCH) {
+  } else if (action.type === network.SONGS_FETCH) {
     return true;
   }
   return state;
@@ -77,13 +78,50 @@ function FetchingReducer(state, action) {
 
 function FetchReducer(state, action) {
   switch (action.type) {
-    case actions.SONGS_RECEIVE:
+    case network.SONGS_RECEIVE:
+      action.json.forEach((song, idx) => {
+        action.json[idx] = Object.assign({}, song, { dataUrl: undefined, fetchedData: false });
+      });
       return action.json;
-    case actions.SONGS_FETCH_ERR:
+    case network.SONGS_FETCH_ERR:
       return state;
     default:
       return state;
   }
+}
+
+function FetchingDataReducer(state, action) {
+  if (action.type === network.SONG_DATA_ENDFETCH) {
+    return false;
+  } else if (action.type === network.SONG_DATA_FETCH) {
+    return true;
+  }
+  return state;
+}
+
+function FetchDataReducer(state, action) {
+  switch (action.type) {
+    case network.SONG_DATA_RECEIVE:
+      // Here state is the playlist
+      // _song or false
+      let _song = _findSongByUuid(state, action.uuid);
+      if (_song !== false) {
+        _song.fetchedData = action.fetchedData;
+        _song.dataUrl = action.dataUrl;
+      }
+      return state;
+    case network.SONG_DATA_FETCH_ERR:
+      return state;
+    default:
+      return state;
+  }
+}
+
+function FirstSongReducer(state, action) {
+  if (state === undefined) {
+    return 0;
+  }
+  return state;
 }
 
 function PlayerApp(state = initialState, action) {
@@ -98,22 +136,33 @@ function PlayerApp(state = initialState, action) {
     case actions.NEXT_SONG:
     case actions.PREV_SONG:
       return Object.assign({}, state, {
-        actualsong: SongMoveReducer(state, action)
+        actualSong: SongMoveReducer(state, action)
       });
     case actions.PLAY_SONG:
     case actions.PAUSE_SONG:
       return Object.assign({}, state, {
-        playing: PlayingReducer(state.playing, action)
+        playing: PlayingReducer(state.playing, action),
       });
-    case actions.SONGS_FETCH:
-    case actions.SONGS_ENDFETCH:
+    case network.SONGS_FETCH:
+    case network.SONGS_ENDFETCH:
       return Object.assign({}, state, {
         fetching: FetchingReducer(state.fetching, action)
       });
-    case actions.SONGS_RECEIVE:
-    case actions.SONGS_FETCH_ERR:
+    case network.SONGS_RECEIVE:
+    case network.SONGS_FETCH_ERR:
       return Object.assign({}, state, {
         playlist: FetchReducer(state.playlist, action)
+      });
+    case network.SONG_DATA_FETCH:
+    case network.SONG_DATA_ENDFETCH:
+      return Object.assign({}, state, {
+        fetchingData: FetchingDataReducer(state.fetchingData, action)
+      });
+    case network.SONG_DATA_RECEIVE:
+    case network.SONG_DATA_FETCH_ERR:
+      return Object.assign({}, state, {
+        playlist: FetchDataReducer(state.playlist, action),
+        actualSong: FirstSongReducer(state.actualSong, action),
       });
     default:
       return state;
@@ -121,5 +170,14 @@ function PlayerApp(state = initialState, action) {
   return state;
 }
 
+// UTILS
+function _findSongByUuid(playlist, uuid) {
+  let result = playlist.find(song => song.uuid === uuid);
+  return (result === undefined)?false:result;
+}
+
+function* _songPropsExtender(song){
+  yield Object.assing({}, song, { dataUrl: undefined, fetchedData: false });
+}
 
 export default PlayerApp;

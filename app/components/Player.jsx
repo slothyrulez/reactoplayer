@@ -5,23 +5,14 @@ import { VOL_DEC, VOL_INC, VOL_MUTE } from "../actions";
 import { increaseVolume, decreaseVolume, muteVolume, changeVolume } from "../actions";
 import { NEXT_SONG, PREV_SONG, PLAY_SONG, PAUSE_SONG } from "../actions";
 import { playSong, pauseSong, nextSong, prevSong } from "../actions";
-import { fetchIfNeeddedSongsThunk } from "../actions";
+
+import { fetchIfNeeddedSongsThunk, fetchDataIfNeeddedSongThunk } from "../actions_network";
+
 import Buttons from "./Buttons.jsx";
 import Volume from "./Volume.jsx";
 import Visor from "./Visor.jsx";
 import Sound from "./Sound.jsx";
 import { PlayList } from "./Adts.js";
-import Reactosock from "../networking/swamp"
-
-// DEFINITIONS
-export const VOLUME_MAX = 100;
-export const VOLUME_MIN = 0;
-export const VOLUME_STEP = 2;
-
-export const SERVER_URL = "http://localhost:8000";
-export const SONGS_API_URL = "/api/songs/?format=json";
-export const WS_SERVER_HOST = "localhost:9999";
-export const WS_SERVER_ENDPOINT = "/data";
 
 export default class Player extends React.Component {
   // static propTypes = {
@@ -45,6 +36,11 @@ export default class Player extends React.Component {
     //   this.queue.addSong(song);
     // }
   }
+  componentDidUpdate(prevProps, prevState){
+    // Data fetch logic start
+    console.log("PLAYER UPDATE");
+    this.props.dispatch(fetchDataIfNeeddedSongThunk());
+  }
   render() {
     let {...allprops} = this.props;
     return (
@@ -52,7 +48,7 @@ export default class Player extends React.Component {
         <Buttons onButtonClick={(eve, action) => this.handleClickButton(eve, action) } />
         <Visor {...allprops} />
         <Volume onVolumeChange={(eve) => this.handleVolumeRange(eve)} volume={this.props.volume} />
-        <Sound volume={this.props.volume} />
+        <Sound playlist={this.props.playlist} actualSong={this.props.actualSong} volume={this.props.volume} playing={this.props.playing}/>
       </div>
     );
   }
@@ -78,10 +74,10 @@ export default class Player extends React.Component {
         dispatch(prevSong(this.props.actualsong));
         break;
       case PLAY_SONG:
-        dispatch(playSong(this.playing));
+        dispatch(playSong(true));
         break;
       case PAUSE_SONG:
-        dispatch(pauseSong(this.playing));
+        dispatch(pauseSong(false));
         break;
       case "STOP_SONG":
         // talkToWorker();
@@ -93,104 +89,55 @@ export default class Player extends React.Component {
 }
 
 
-// var Worker = require('worker!./song_fetcher_worker.js');
-// var worker = new Worker();
-// worker.addEventListener('message', function(e) {
-//   console.log("FROM W ", e.data);
-// }, false);
-// console.log("talkToWorker", worker);
-//
-// // talkToWorker
-// function talkToWorker(){
-//   console.log("talkToWorker", worker);
-//   worker.postMessage({'cmd': 'start', 'msg': 'Hi'});
-// }
-//
-import { soundManager } from 'soundmanager2';
-var sm2 = soundManager;
-
-var reactosock = new Reactosock(WS_SERVER_HOST, WS_SERVER_ENDPOINT);
-// console.log(" -> ", reactosock.connection.socket.readyState);
-reactosock.ready(function(){
-  // reactosock.getList("song-router", (...args)=>{console.log("SUCCCES", args)}, (...args)=>{console.log("ERROR ", args)});
-  reactosock.getSingle("song-router", {"id": 12}, fileHandler, ()=>{console.log("ERROR")});
-});
-
-function fileHandler(eve, data){
-  let parsed_data = data.song_file;
-  let cosa = new Uint8Array(parsed_data);
-  console.log("PARSED ", parsed_data, parsed_data.length);
-  console.log("UINT ", cosa, cosa.length);
-  console.log("UINT ", cosa == parsed_data);
-  // let cosa = new Uint8Array(data.song_file);
-  let mime = data.mime_type;
-  let _ab = new ArrayBuffer([cosa.buffer]);
-  let file = new Blob([cosa.buffer], {type : mime });
-  console.log("FILE HANDLER", eve, typeof(data.song_file), cosa, _ab, file);
-  var url = URL.createObjectURL(file);
-  console.log(url);
-  var foo = new Audio(url);
-  console.log(foo);
-
-  console.log(sm2);
-  foo.play();
-  var mysong = sm2.createSound(foo);
-  // mysong.type=mime;
-  // mysong.url = url;
-  mysong.play({volume:10});
-}
-// reactosock.send("foooooo");
-//
-// function fetchSongs(plist) {
-//   fetch(SERVER_URL + SONGS_API_URL, {mode: 'cors'}).then(function(response) {
-//     if (response.status !== 200) {
-//         console.log("ERROR response code: " + response.status);
-//         return;
-//     }
-//     response.json().then(function(data){
-//       console.log(data);
-//       plist.addSongs(data);
-//       console.log(plist.dataStore);
-//     });
-//   }).catch(function(err){
-//     console.log("FETCH ERROR : ", err);
-//   })
-// }
-
-// {
-//   actualsong: {
+// Single song definition
+//   {
+//    uuid: "52635571-3e25-475f-8e79-219af57e41e4",
 //    author:  "lala",
 //    name: "lala,
 //    tags: ["alternative", "rock"],
 //    date: "25-07-2014"
+//    fetchedData: false,
+//    dataUrl: "",
 //   }
+
+// Global state sxample
+// {
+//   actualSong: 0,
 //   playing: true,,
 //   volume: 50,
 //   fetching: false,
+//   fetchingData: false,
 //   playlist: [{
+//     uuid: "52635571-3e25-475f-8e79-219af57e41e4",
 //     author: 'Consider using Redux',
 //     date: "25-07-2014",
 //     name: "lalala",
 //     tags: ["alternative", "rock"],
+//     fetchedData: false,
+//     dataUrl: "",
 //   }, {
+//     uuid: "52635571-3e25-475f-8e79-219af57e41e4",
 //     author: 'Keep all state in a single tree',
 //     date: "25-07-2014",
 //     name: 'troloro',
 //     tags: ["alternative", "rock"],
+//     fetchedData: false
+//     dataUrl: "",
 //   }]
 // }
+
 
 
 // Which props do we want to inject, given the global state?
 // Note: use https://github.com/faassen/reselect for better performance.
 function select(state) {
-  console.log("ARG", state);
   return {
     volume: state.volume,
     playing: state.playing,
     playlist: state.playlist,
-    actualsong: state.actualsong,
+    actualSong: state.actualSong,
     fetching: state.fetching,
+    fetchingData: state.fetchingData,
   };
 }
 

@@ -6,9 +6,10 @@ import createLogger from 'redux-logger';
 import React from "react";
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-
 import PlayerApp from "./reducers";
 import Player from "./components/Player";
+
+import { fetchDataMiddleware } from "./actions_network";
 
 main();
 
@@ -19,12 +20,12 @@ function main() {
   const loggerMiddleware = createLogger();
 
   let createStoreWithMiddleware = applyMiddleware(
-    thunkMiddleware, // lets us dispatch() functions
+    thunkMiddleware, // lets use dispatch() functions
+    fetchDataMiddleware,
     loggerMiddleware,
   )(createStore);
 
   let store = createStoreWithMiddleware(PlayerApp);
-
   React.render(
     <Provider store={store}>
       {() => <Player />}
