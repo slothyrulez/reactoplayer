@@ -11,6 +11,7 @@ const initialState = {
   fetching: false,
   fetchingData: false,
   volume: VOLUME_MIN,
+  autoPlay: true,
 };
 
 function AutoPlayChangeReducer(state, action) {

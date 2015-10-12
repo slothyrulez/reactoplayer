@@ -16,11 +16,12 @@ export default class Button extends  React.Component {
     this.icon_name = "";
     this.button_action = "";
     this.handleClick = this.handleClick.bind(this);
+    this.className = "button";
   }
   render() {
     return (
-      <div className="player-button-wrapper">
-        <button className={"player-button icon icon-" + this.icon_name + " " + this.button_name} onClick={e => this.handleClick(e)}></button>
+      <div className={this.className + "-wrapper"}>
+        <button className={this.className + " icon icon-" + this.icon_name + " " + this.button_name} onClick={e => this.handleClick(e)}></button>
       </div>
     )
   }

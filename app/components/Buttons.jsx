@@ -7,11 +7,12 @@ export default class Buttons extends React.Component {
   }
   constructor(props) {
     super(props);
+    this.className="buttons";
   }
   render() {
     var {...props} = this.props;
     return (
-      <div className='Buttons'>
+      <div className={this.className}>
         <Play {...props} />
         <Pause {...props} />
         <Stop {...props} />

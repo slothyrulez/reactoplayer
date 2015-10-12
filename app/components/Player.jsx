@@ -28,6 +28,7 @@ export default class Player extends React.Component {
 //  }
   constructor(props){
     super(props);
+    this.className = "player";
     // Load playlist
     this.props.dispatch(fetchIfNeeddedSongsThunk([]));
   }
@@ -38,7 +39,7 @@ export default class Player extends React.Component {
   render() {
     let {...allprops} = this.props;
     return (
-      <div className='Player'>
+      <div className={this.className}>
         <Buttons onButtonClick={(eve, action) => this.handleClickButton(eve, action) } />
         <Visor {...allprops} />
         <Volume
@@ -162,6 +163,7 @@ export default class Player extends React.Component {
 function select(state) {
   return {
     volume: state.volume,
+    autoPlay: state.autoPlay,
     playing: state.playing,
     playlist: state.playlist,
     playPosition: state.playPosition,

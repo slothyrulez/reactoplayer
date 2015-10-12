@@ -71,8 +71,8 @@ body {
 }
 
 
-$player-width: 400px;
-$player-height: 150px;
+$player-width: 450px;
+$player-height: 300px;
 $slider-width: 100%;
 
 .demo-position {
@@ -80,7 +80,7 @@ $slider-width: 100%;
   top: 30vh;
 }
 
-.Player {
+.player {
   @extend .bg-gradient;
   @extend .demo-position;
 
@@ -89,34 +89,36 @@ $slider-width: 100%;
   // DEMO
   border: 1px solid $white;
   padding: 2em;
-  height: $player-height;
+  // height: $player-height;
   width: $player-width;
-  //
+  display: flex;
+  flex-wrap: wrap;
 
-  .Buttons {
+  .buttons {
     display: flex;
+    flex-flow: row;
 
-    .player-button-wrapper {
+    .button-wrapper {
       display: inline-flex;
 
       @extend .btn-wrapper;
-      .player-button {
+      .button {
         @extend .btn;
       }
     }
   }
 
-  .Visor {
+  .visor {
+    display: flex;
     font-family: "Poppins", sans-serif;
     font-weight: lighter;
   }
 
-  .Slider {
-    width: $slider-width;
-    height: 4px;
-    .Track {
-      position: relative;
-    }
+  .volume {
+    display: flex;
+  }
+  .progress {
+    display: flex;
   }
 }
 
