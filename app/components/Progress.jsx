@@ -1,55 +1,30 @@
 import React from 'react';
-import SoundCloudAudio from 'soundcloud-audio';
-import ClassNames from 'classnames';
 
-let { PropTypes, Component } = React;
-
-class Progress extends Component {
-    handleSeekTrack(e) {
-        let { onSeekTrack, soundCloudAudio } = this.props;
-        const xPos = (e.pageX - e.currentTarget.getBoundingClientRect().left) / e.currentTarget.offsetWidth;
-
-
-        if (soundCloudAudio && !isNaN(soundCloudAudio.audio.duration)) {
-            soundCloudAudio.audio.currentTime = (xPos * soundCloudAudio.audio.duration);
-        }
-
-        onSeekTrack && onSeekTrack.call(this, xPos, e);
+export default class Progress extends  React.Component {
+  constructor(props) {
+    super(props);
+    this.class_name = "progress";
+  }
+  _get_actual(){
+    return this.props.playlist[this.props.actualSong];
+  }
+  render() {
+    let _song = this._get_actual();
+    let duration = (_song)?_song.duration:100;
+    return (
+        <input className={this.class_name}
+          type="range"
+          min={0}
+          max={duration}
+          step={1}
+          value={this.props.playPosition}
+          onChange={(eve) => { this.handleSeekPosition(eve) }} />
+    );
+  }
+  handleSeekPosition(eve){
+    // Fire only if there is a song loaded
+    if (this.props.actualSong !== undefined) {
+      this.props.onSongSeekChange(eve);
     }
-
-    render() {
-        let { value, className, innerClassName } = this.props;
-
-        if (value < 0) {
-            value = 0;
-        }
-
-        if (value > 100) {
-            value = 100;
-        }
-
-        let style = {width: `${value}%`};
-        let classNames = ClassNames('sb-soundplayer-progress-container', className);
-        let innerClassNames = ClassNames('sb-soundplayer-progress-inner', innerClassName);
-
-        return (
-            <div className={classNames} onClick={this.handleSeekTrack.bind(this)}>
-                <div className={innerClassNames} style={style} />
-            </div>
-        );
-    }
+  }
 }
-
-Progress.propTypes = {
-    className: PropTypes.string,
-    innerClassName: React.PropTypes.string,
-    value: React.PropTypes.number,
-    onSeekTrack: PropTypes.func,
-    soundCloudAudio: PropTypes.instanceOf(SoundCloudAudio)
-};
-
-Progress.defaultProps = {
-    value: 0
-};
-
-export default Progress;

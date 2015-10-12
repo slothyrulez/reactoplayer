@@ -3,6 +3,11 @@ export const NEXT_SONG = 'NEXT_SONG';
 export const PREV_SONG = 'PREV_SONG';
 export const PLAY_SONG = 'PLAY_SONG';
 export const PAUSE_SONG = 'PAUSE_SONG';
+export const AUTOPLAY = 'AUTOPLAY';
+export const SONG_LOAD = 'SONG_LOAD';
+export const SONG_PROGRESS = 'SONG_PROGRESS';
+export const SONG_SEEK = 'SONG_SEEK';
+export const SONG_END = 'SONG_END';
 export const VOL_MUTE = 'VOL_MUTE';
 export const VOL_INC = 'VOL_INC';
 export const VOL_DEC = 'VOL_DEC';
@@ -30,6 +35,26 @@ export function playSong(bool) {
 
 export function pauseSong(bool) {
   return { type: PAUSE_SONG, bool };
+}
+
+export function autoPlayChange() {
+  return { type: AUTOPLAY };
+}
+
+export function songLoad(sound, song){
+  return { type: SONG_LOAD, sound:sound, song:song};
+}
+
+export function songProgress(position){
+  return { type: SONG_PROGRESS, position };
+}
+
+export function songSeek(position){
+  return { type: SONG_SEEK, position: position };
+}
+
+export function songEnd(song) {
+  return { type: SONG_END, song };
 }
 
 export function muteVolume(num) {

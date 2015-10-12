@@ -26,6 +26,5 @@ export default class Button extends  React.Component {
   }
   handleClick(e) {
     this.props.onButtonClick(e, this.button_action);
-    //console.log(e, this.button_name, this.button_action);
   }
 }

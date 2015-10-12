@@ -65,12 +65,10 @@ function fetchSongsHelper(songs) {
           return Promise.resolve(); // Nothing to wait for
         }
         response.json().then(function(data) {
-          console.log("fetch song helper", data);
           dispatch(receiveSongs(data));
           dispatch(endfetchSongs(true));
         });
       }).catch(function(err) {
-        console.log("FETCH ERROR : ", err);
         dispatch(errorFetchSong(err));
       });
   };
@@ -99,7 +97,6 @@ export function fetchIfNeeddedSongsThunk(songs) {
 
 function fetchDataSongHelper(song) {
   return dispatch => {
-    console.log(worker);
     if (worker_retrieve_start(song)){
       dispatch(fetchDataSong(true));
     };
@@ -123,22 +120,18 @@ function shouldFetchDataSong(state) {
   // If all the playlist is fetched no fecth required
   if (!state.playlist.length) {
     // No playlist to fetch data
-    console.log("NO PLAYLIST");
     return false;
   }
   if (state.fetchingData) {
     // Already fetching
-    console.log("ALREADY FETCHING");
     return false;
   }
   let _fetch = _fetch_data_playlist(state);
   if (_fetch) {
     // Fetch data for a song
-    console.log("_fetch song", _fetch);
     return _fetch;
   }
   // All data fetched
-  console.log("ALL FETCHED");
   return false
 }
 
@@ -170,7 +163,6 @@ function worker_retrieve_start(song) {
     worker.postMessage({"cmd": "start_fetching", "uuid": song.uuid});
     return true;
   } else {
-    console.log("NOT READY WORKER");
     return false;
   }
 }
@@ -185,20 +177,17 @@ export const fetchDataMiddleware = createOneShot((dispatch) => {
   // Register only once
   worker.addEventListener('message', (e) => {
     let cmd = e.data.cmd;
-    console.log("worker listener ", cmd);
     if (cmd === "end_fetch") {
       dispatch(receiveDataSong({dataUrl: e.data.dataUrl, uuid: e.data.uuid}))
       dispatch(endFetchDataSong(true));
       return;
     }
     if (cmd === "error_fetch") {
-      console.log("worker error_fetch");
       dispatch(errorFetchDataSong(err));
       return;
     }
     if (cmd === "worker_ready") {
       worker._ready = true;
-      console.log("worker_READY");
       return;
     }
   }, false);

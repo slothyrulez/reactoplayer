@@ -14,7 +14,7 @@ export default class Volume extends  React.Component {
           max={VOLUME_MAX}
           step={VOLUME_STEP}
           value={this.props.volume}
-          onChange={(eve) => {console.log(eve); this.props.onVolumeChange(eve)}} />
+          onChange={(eve) => {this.props.onVolumeChange(eve)}} />
     );
   }
 }

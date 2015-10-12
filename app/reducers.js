@@ -3,13 +3,42 @@ import * as network from './actions_network';
 import { VOLUME_MIN, VOLUME_STEP, VOLUME_MAX } from "./settings";
 
 const initialState = {
-  volume: VOLUME_MIN,
-  playing: false,
-  playlist: [],
   actualSong: undefined,
+  playing: false,
+  playPosition: 0,
+  seekPosition: undefined,
+  playlist: [],
   fetching: false,
   fetchingData: false,
+  volume: VOLUME_MIN,
 };
+
+function AutoPlayChangeReducer(state, action) {
+  return !state;
+}
+
+function PositionChangeReducer(state, action) {
+  return action.position;
+}
+
+function PositionSeekingReducer(state, action) {
+  return action.position;
+}
+
+function SongEndReducer(state, action) {
+  let actual = state.actualSong;
+  let list = state.playlist;
+  return get_next(list, actual);
+}
+
+function LoadSongReducer(state, action) {
+  // state is playlist
+  // action.song == actualSong
+  let idx = action.song;
+  let song = state[idx];
+  song.duration = action.sound.duration;
+  return state;
+}
 
 function VolumeReducer(state, action) {
   switch (action.type) {
@@ -138,10 +167,32 @@ function PlayerApp(state = initialState, action) {
       return Object.assign({}, state, {
         actualSong: SongMoveReducer(state, action)
       });
+    case actions.SONG_END:
+      return Object.assign({}, state, {
+        actualSong: SongEndReducer(state, action)
+      });
     case actions.PLAY_SONG:
     case actions.PAUSE_SONG:
       return Object.assign({}, state, {
         playing: PlayingReducer(state.playing, action),
+      });
+    case actions.AUTOPLAY:
+      return Object.assign({}, state, {
+        autoPlay: AutoPlayChangeReducer(state, action),
+      });
+    case actions.SONG_LOAD:
+      return Object.assign({}, state, {
+        playlist: LoadSongReducer(state.playlist, action),
+        playPosition: 0,
+      });
+    case actions.SONG_SEEK:
+      return Object.assign({}, state, {
+        seekPosition: PositionSeekingReducer(state, action),
+        playPosition: PositionSeekingReducer(state, action),
+      });
+    case actions.SONG_PROGRESS:
+      return Object.assign({}, state, {
+        playPosition: PositionChangeReducer(state.playPosition, action),
       });
     case network.SONGS_FETCH:
     case network.SONGS_ENDFETCH:
