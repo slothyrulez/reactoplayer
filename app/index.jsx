@@ -22,7 +22,7 @@ function main() {
   let createStoreWithMiddleware = applyMiddleware(
     thunkMiddleware, // lets use dispatch() functions
     fetchDataMiddleware,
-    loggerMiddleware,
+    // loggerMiddleware,
   )(createStore);
 
   let store = createStoreWithMiddleware(PlayerApp);

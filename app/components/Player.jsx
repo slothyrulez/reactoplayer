@@ -113,6 +113,28 @@ export default class Player extends React.Component {
 }
 
 
+
+
+
+// Which props do we want to inject, given the global state?
+// Note: use https://github.com/faassen/reselect for better performance.
+function select(state) {
+  return {
+    volume: state.volume,
+    autoPlay: state.autoPlay,
+    playing: state.playing,
+    playlist: state.playlist,
+    playPosition: state.playPosition,
+    seekPosition: state.seekPosition,
+    actualSong: state.actualSong,
+    fetching: state.fetching,
+    fetchingData: state.fetchingData,
+  };
+}
+
+export default connect(select)(Player);
+
+// DOC
 // Single song definition
 //   {
 //    uuid: "52635571-3e25-475f-8e79-219af57e41e4",
@@ -155,23 +177,3 @@ export default class Player extends React.Component {
 //     dataUrl: "",
 //   }]
 // }
-
-
-
-// Which props do we want to inject, given the global state?
-// Note: use https://github.com/faassen/reselect for better performance.
-function select(state) {
-  return {
-    volume: state.volume,
-    autoPlay: state.autoPlay,
-    playing: state.playing,
-    playlist: state.playlist,
-    playPosition: state.playPosition,
-    seekPosition: state.seekPosition,
-    actualSong: state.actualSong,
-    fetching: state.fetching,
-    fetchingData: state.fetchingData,
-  };
-}
-
-export default connect(select)(Player);
