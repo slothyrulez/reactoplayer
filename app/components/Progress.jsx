@@ -12,6 +12,7 @@ export default class Progress extends  React.Component {
     let _song = this._get_actual();
     let duration = (_song)?_song.duration:100;
     return (
+      <div className={this.class_name + "-wrapper"}>
         <input className={this.class_name}
           type="range"
           min={0}
@@ -19,6 +20,7 @@ export default class Progress extends  React.Component {
           step={1}
           value={this.props.playPosition}
           onChange={(eve) => { this.handleSeekPosition(eve) }} />
+      </div>
     );
   }
   handleSeekPosition(eve){

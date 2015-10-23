@@ -15,7 +15,6 @@ export default class Buttons extends React.Component {
       <div className={this.className}>
         <Play {...props} />
         <Pause {...props} />
-        <Stop {...props} />
         <Prev {...props} />
         <Next {...props} />
         <VolumeMute {...props} />

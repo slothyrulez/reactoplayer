@@ -43,6 +43,9 @@ export default class Sound extends React.Component {
   is_ok() {
     return this.sm2.ok();
   }
+  is_playing() {
+    return (this.sound !== undefined )?this.sound.playState:0;
+  }
   _createSound(props) {
     let _actual = this._get_actual();
     let defaultSoundProps = {
@@ -60,6 +63,9 @@ export default class Sound extends React.Component {
   _loadSound() {
     this.sm2.load(this.sound.id);
   }
+  _destructSound() {
+    this.sm2.destroySound(this.sound.id);
+  }
   _hasSongChanged(next, actual) {
     return (next!==actual);
   }
@@ -67,6 +73,9 @@ export default class Sound extends React.Component {
     return (next!==actual);
   }
   _changeSong() {
+    if ( this.is_playing() === 1) {
+      this._destructSound();
+    }
     this._createSound();
     this._loadSound();
   }

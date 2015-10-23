@@ -10,10 +10,11 @@ React + Redux + sockjs + es6 + webpack + babel
 ## Roadmap
 
 - Pre 1.0
-  - FileList API
   - Play list
+  - Visor
   - TDD
   - Documentation
+  - Style player
 
 
 ## Status

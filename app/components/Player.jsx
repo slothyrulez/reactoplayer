@@ -41,7 +41,6 @@ export default class Player extends React.Component {
     return (
       <div className={this.className}>
         <Buttons onButtonClick={(eve, action) => this.handleClickButton(eve, action) } />
-        <Visor {...allprops} />
         <Volume
           onVolumeChange={(eve) => this.handleVolumeRange(eve)}
           volume={this.props.volume} />
@@ -50,6 +49,7 @@ export default class Player extends React.Component {
           playPosition={this.props.playPosition}
           playlist={this.props.playlist}
           actualSong={this.props.actualSong} />
+        <Visor {...allprops} />
         <Sound
           onSongLoad={(data) => this.handleSongLoad(data)}
           onSongProgress={(data) => this.handleSongProgress(data)}

@@ -8,6 +8,7 @@ export default class Volume extends  React.Component {
   }
   render() {
     return (
+      <div className={this.class_name + "-wrapper"}>
         <input className={this.class_name}
           type="range"
           min={VOLUME_MIN}
@@ -15,6 +16,7 @@ export default class Volume extends  React.Component {
           step={VOLUME_STEP}
           value={this.props.volume}
           onChange={(eve) => {this.props.onVolumeChange(eve)}} />
+      </div>
     );
   }
 }
