@@ -36,3 +36,39 @@ $primary-color: #dc2c42;
 // We use these to make sure border radius matches unless we want it different.
 $global-radius: 3px;
 $global-rounded: 1000px;
+$global-border-radius: .2em;
+
+
+
+%grey-gradient {
+  @include background(linear-gradient(top, $aluminum, #d0d0d0 80% ));
+}
+
+%white-gradient {
+  @include background(linear-gradient(top, #eee, #bbb 70%, #9f9f9f 100% ));
+}
+
+%bg-gradient {
+  @include background(linear-gradient(to bottom , $ghost-grey, darken($lightgey, 10%)));
+}
+
+$player-shadow: rgba(20,20,20, .3);
+
+$button-color: $charcoal;
+$button-wrapper-shadow: inset rgba(0,0,0, .2) 0 5px 6px ;
+$button-shadow: rgba(0,0,0,.4) 0 1px 2px;
+$button-hover-shadow: rgba(0,0,0,.45) 0 1px 3px;
+$button-active-shadow: inset rgba(0,0,0,.5) 0 3px 5px;
+$button-border-radius: $global-border-radius;
+$transparent: rgba(0,0,0, .1);
+
+$thumb-shadow: rgba(0,0,0,.4) 0 1px 2px;
+$thumb-shadow: rgba(0,0,0,.45) 0 1px 2.5px;
+$thumb-border-radius: $button-border-radius;
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed);
+
+* {
+  font-family: 'Roboto Condensed', sans-serif;
+}

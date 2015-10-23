@@ -1,0 +1,38 @@
+// General button style (reset)
+
+.btn-wrapper {
+  // border-bottom: 2px solid $silver;
+  // border-radius: $button-border-radius;
+  // box-shadow: $button-wrapper-shadow;
+}
+
+.btn {
+  @extend %white-gradient;
+
+  background: none;
+  background-color: $silver;
+  background-position: 0 6px;
+  background-repeat: no-repeat;
+  border: 0;
+  border-radius: $button-border-radius;
+  box-shadow: $button-shadow;
+  color: $button-color;
+  cursor: pointer;
+  left: 0;
+  margin: 0.5em;
+  outline: none;
+  overflow: hidden;
+  padding: 1em;
+  text-transform: uppercase;
+  top: 0;
+  transition: all .1s ease-in;
+
+  &:hover {
+    background-position: 0 0;
+    box-shadow: $button-hover-shadow;
+  }
+
+  &:active {
+    box-shadow: $button-active-shadow;
+  }
+}

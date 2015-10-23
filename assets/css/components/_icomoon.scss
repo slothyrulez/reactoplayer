@@ -3,26 +3,26 @@
 $icomoonPath: 'assets/fonts/';
 
 @font-face {
-  font-family: 'icoSoonvibe';
-  src:url('#{$icomoonPath}/icoSoonvibe.eot');
-  src:url('#{$icomoonPath}/icoSoonvibe.eot') format('embedded-opentype'),
-  url('#{$icomoonPath}/icoSoonvibe.ttf') format('truetype'),
-  url('#{$icomoonPath}/icoSoonvibe.woff') format('woff'),
-  url('#{$icomoonPath}/icoSoonvibe.svg#icomoon') format('svg');
+  font-family: 'icoreactoplayer';
+  src:url('#{$icomoonPath}/icoreactoplayer.eot');
+  src:url('#{$icomoonPath}/icoreactoplayer.eot') format('embedded-opentype'),
+		url('#{$icomoonPath}/icoreactoplayer.ttf') format('truetype'),
+		url('#{$icomoonPath}/icoreactoplayer.woff') format('woff'),
+		url('#{$icomoonPath}/icoreactoplayer.svg#icoreactoplayer') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"], .icomoon-icon{
-  font-family: 'icoSoonvibe';
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icoreactoplayer';
   speak: none;
-  font-style: normal;
+	font-style: normal;
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
   line-height: 1;
 
-  // Better Font Rendering
+  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -32,7 +32,7 @@ $icomoonPath: 'assets/fonts/';
 }
 
 // Icon sticked in corner of a block element
-.sticked-icon{
+.sticked-icon {
     display: block;
     position: relative;
     padding-left: rem-calc(40px);
@@ -43,7 +43,7 @@ $icomoonPath: 'assets/fonts/';
         position: absolute;
         top: rem-calc(15px);
         left: rem-calc(15px);
-        font-family: 'icoSoonvibe';
+        font-family: 'icoreactoplayer';
         //font-size: rem-calc(15px);
     }
 
@@ -57,7 +57,7 @@ $icomoonPath: 'assets/fonts/';
     font-family: inherit;
 
     &:before{
-        font-family: 'icoSoonvibe';
+        font-family: 'icoreactoplayer';
         margin-right: rem-calc(5px);
         speak: none;
         font-style: normal;
@@ -96,7 +96,7 @@ $icomoonPath: 'assets/fonts/';
             position: absolute;
             top: 0.5em;
             left: 0.5em;
-            font-family: 'icoSoonvibe';
+            font-family: 'icoreactoplayer';
             font-size: 2em;
         }
     }
@@ -117,7 +117,7 @@ $icomoonPath: 'assets/fonts/';
             position: absolute;
             top: 0.5em;
             left: 0.5em;
-            font-family: 'icoSoonvibe';
+            font-family: 'icoreactoplayer';
             font-size: 3em;
         }
     }
@@ -138,7 +138,7 @@ $icomoonPath: 'assets/fonts/';
             position: absolute;
             top: 0.5em;
             left: 0.5em;
-            font-family: 'icoSoonvibe';
+            font-family: 'icoreactoplayer';
             font-size: 4em;
         }
     }
@@ -158,7 +158,7 @@ $icomoonPath: 'assets/fonts/';
       position: absolute;
       top: 0.25em;
       left: 0.25em;
-      font-family: 'icoSoonvibe';
+      font-family: 'icoreactoplayer';
   }
   &.icoAft {
 
@@ -188,7 +188,7 @@ $icomoonPath: 'assets/fonts/';
   position: relative;
   &[data-icon]:before {
     top:1rem;
-  font-family: 'icoSoonvibe';
+  font-family: 'icoreactoplayer';
   content: attr(data-icon);
   speak: none;
   line-height: 0;
@@ -203,114 +203,60 @@ $icomoonPath: 'assets/fonts/';
  *
  */
 
+ .icon-cloud-fetch:before {
+ 	content: "\f00c";
+ }
+ .icon-database-fetch:before {
+ 	content: "\f096";
+ }
+ .icon-p_gear:before {
+ 	content: "\f02f";
+ }
+ .icon-issue-reopened:before {
+ 	content: "\f027";
+ }
+ .icon-p_playlist:before {
+ 	content: "\f061";
+ }
+ .icon-p_next:before {
+ 	content: "\f0bd";
+ }
+ .icon-p_pause:before {
+ 	content: "\f0bb";
+ }
+ .icon-p_play:before {
+ 	content: "\f0bf";
+ }
+ .icon-p_prev:before {
+ 	content: "\f0bc";
+ }
+ .icon-p_settings:before {
+ 	content: "\f07c";
+ }
+ .icon-p_sync:before {
+ 	content: "\f087";
+ }
+ .icon-p_vol_inc:before {
+ 	content: "\f0ba";
+ }
+ .icon-p_vol_mute:before {
+ 	content: "\e801";
+ }
+ .icon-music:before {
+ 	content: "\f001";
+ }
+ .icon-p_vol_dec:before {
+ 	content: "\f028";
+ }
  .icon-p_vol_max:before {
-	content: "\e622";
-}
-.icon-p_vol_low:before {
-	content: "\e623";
-}
-.icon-p_vol_mute:before {
-	content: "\e624";
-}
-.icon-p_vol_inc:before {
-	content: "\e625";
-}
-.icon-p_vol_dec:before {
-	content: "\e626";
-}
-.icon-p_prev:before {
-	content: "\e61e";
-}
-.icon-p_next:before {
-	content: "\e61f";
-}
-.icon-p_play:before {
-	content: "\e618";
-}
-.icon-p_pause:before {
-	content: "\e619";
-}
-.icon-p_stop:before {
-	content: "\e61a";
-}
-.icon-p_backward:before {
-	content: "\e61b";
-}
-.icon-p_forward:before {
-	content: "\e61c";
-}
-.icon-p_volume:before {
-	content: "\e61d";
-}
-.icon-blogEchos:before {
-	content: "\e615";
-}
-.icon-micro:before {
-	content: "\e616";
-}
-.icon-starLight:before {
-	content: "\e617";
-}
-.icon-play:before {
-	content: "\e614";
-}
-.icon-arrow_right:before {
-	content: "\e60f";
-}
-.icon-arrow_left:before {
-	content: "\e610";
-}
-.icon-social:before {
-	content: "\e600";
-}
-.icon-user:before {
-	content: "\e601";
-}
-.icon-upSound:before {
-	content: "\e602";
-}
-.icon-starRate:before {
-	content: "\e603";
-}
-.icon-playlist:before {
-	content: "\e604";
-}
-.icon-listSound:before {
-	content: "\e605";
-}
-.icon-like:before {
-	content: "\e606";
-}
-.icon-home:before {
-	content: "\e607";
-}
-.icon-downSound:before {
-	content: "\e608";
-}
-.icon-conf:before {
-	content: "\e609";
-}
-.icon-blog:before {
-	content: "\e60a";
-}
-.icon-blindSound:before {
-	content: "\e60b";
-}
-.icon-bell:before {
-	content: "\e60c";
-}
-.icon-playlistAdd:before {
-	content: "\e60d";
-}
-.icon-blogInv:before {
-	content: "\e60e";
-}
-.icon-facebook:before {
-	content: "\e611";
-}
-.icon-twit:before {
-	content: "\e612";
-}
-.icon-youtube:before {
-	content: "\e613";
-}
+ 	content: "\f029";
+ }
+ .icon-p_cover:before {
+ 	content: "\f03e";
+ }
+ .icon-p_eject:before {
+ 	content: "\f052";
+ }
+ .icon-p_random:before {
+ 	content: "\f074";
+ }

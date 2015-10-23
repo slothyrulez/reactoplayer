@@ -24,6 +24,7 @@
     "node-sass": "^3.3.3",
     "raw-loader": "^0.5.1",
     "react-hot-loader": "^1.3.0",
+    "react-styles-loader": "0.0.5",
     "sass-loader": "^3.0.0",
     "style-loader": "^0.12.4",
     "webpack": "^1.12.2",

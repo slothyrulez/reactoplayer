@@ -2,94 +2,69 @@
 
 // VOLUME - TRACK
 
-$track-bg: rgba(54, 126, 189, 0.78);;
-$track-bg-2: rgba(48, 113, 169, 0.78);
-$track-bg-3: rgba(42, 100, 149, 0.78);
+$track-bg: $track-bg;
+$track-bg2: $track-bg2;
+$track-bg3: $track-bg3;
 
+$track-sw: $track-sw;
+$track-sw2: $track-sw2;
 
-input[type=range].volume::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 11.4px;
-  cursor: pointer;
-  box-shadow: 1px 1px 1px $black, 0px 0px 1px #0d0d0d;
-  background: $track-bg-2;
-  border-radius: 1.3px;
-  border: 0.2px solid #010101;
-}
-// input[type=range].volume::-webkit-slider-thumb {
-//   box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
-//   border: 1.8px solid #00001e;
-//   height: 26px;
-//   width: 26px;
-//   border-radius: 15px;
-//   background: $white;
-//   cursor: pointer;
-//   -webkit-appearance: none;
-//   margin-top: -7.5px;
-// }
-
-input[type=range].volume:focus::-webkit-slider-runnable-track {
-  background: $track-bg;
+%webkit-track {
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    box-shadow: 0.5px 0.5px 0.5px $track-sw, 0px 0px 0.5px #0d0d0d;
+    background: $track-bg;
+    border-radius: 1px;
+    border: 0.2px solid #010101;
+  }
+  &:focus::-webkit-slider-runnable-track {
+    background: $track-bg2;
+  }
 }
 
-input[type=range].volume::-moz-range-track {
-  width: 100%;
-  height: 11.4px;
-  cursor: pointer;
-  box-shadow: 1px 1px 1px $black, 0px 0px 1px #0d0d0d;
-  background: $track-bg-2;
-  border-radius: 1.3px;
-  border: 0.2px solid #010101;
+%moz-track {
+  &::-moz-range-track {
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    box-shadow: 0.5px 0.5px 0.5px $track-sw, 0px 0px 0.5px #0d0d0d;
+    background: $track-bg2;
+    border-radius: 1px;
+    border: 0.2px solid #010101;
+  }
 }
 
-// input[type=range].volume::-moz-range-thumb {
-//   box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
-//   border: 1.8px solid #00001e;
-//   height: 26px;
-//   width: 26px;
-//   border-radius: 15px;
-//   background: $white;
-//   cursor: pointer;
-// }
+%ms-track {
+  &::-ms-track {
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+    cursor: pointer;
+    height: 5px;
+    width: 100%;
+  }
 
-input[type=range].volume::-ms-track {
-  width: 100%;
-  height: 11.4px;
-  cursor: pointer;
-  background: transparent;
-  border-color: transparent;
-  color: transparent;
-}
+  &::-ms-fill-lower {
+    background: $track-bg3;
+    border: 0.2px solid #010101;
+    border-radius: 2px;
+    box-shadow: 0.5px 0.5px 0.5px $track-sw, 0px 0px 0.5px #0d0d0d;
+  }
 
-input[type=range].volume::-ms-fill-lower {
-  background: track-bg-3;
-  border: 0.2px solid #010101;
-  border-radius: 2.6px;
-  box-shadow: 1px 1px 1px $black, 0px 0px 1px #0d0d0d;
-}
+  &::-ms-fill-upper {
+    background: $track-bg2;
+    border: 0.2px solid #010101;
+    border-radius: 2px;
+    box-shadow: 0.5px 0.5px 0.5px $track-sw, 0px 0px 0.5px #0d0d0d;
+  }
 
-input[type=range].volume::-ms-fill-upper {
-  background: $track-bg-2;
-  border: 0.2px solid #010101;
-  border-radius: 2.6px;
-  box-shadow: 1px 1px 1px $black, 0px 0px 1px #0d0d0d;
-}
+  &:focus::-ms-fill-lower {
+    background: $track-bg2;
+  }
 
-// input[type=range].volume::-ms-thumb {
-//   box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
-//   border: 1.8px solid #00001e;
-//   height: 26px;
-//   width: 26px;
-//   border-radius: 15px;
-//   background: $white;
-//   cursor: pointer;
-//   height: 11.4px;
-// }
-
-input[type=range].volume:focus::-ms-fill-lower {
-  background: $track-bg-2;
-}
-
-input[type=range].volume:focus::-ms-fill-upper {
-  background: $track-bg;
+  &:focus::-ms-fill-upper {
+    background: $track-bg;
+  }
 }

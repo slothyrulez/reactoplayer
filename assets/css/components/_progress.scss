@@ -2,111 +2,41 @@
 
 // PROGRESS - COMMON
 
-@import 'thumb';
-@import 'track';
+.progress-wrapper {
+  $track-bg: rgba(85, 85, 85, 0.78);
+  $track-bg2: rgba(85, 90, 120, 0.78);
+  $track-bg3: rgba(85, 95, 100, 0.78);
 
 
-$progress-bg: rgba(54, 126, 189, 0.78);
-$progress-bg-2: rgba(48, 113, 169, 0.78);
-$progress-bg-3: rgba(42, 100, 149, 0.78);
-//$progress-bg-shadow:;
+  $track-sw: $black;
+  $track-sw2: #0d0d0d;
 
-input[type=range].progress {
-  -webkit-appearance: none;
-  width: 100%;
-  margin: 7.3px 0;
-  outline: none;
-}
+  $thumb-bg: $silver;
+  $thumb-sw: #000031;
+  $thumb-sw2: #00004b;
+  $thumb-border: #00001e;
+  $thumb-width: 15px;
+  $thumb-height: 15px;
 
-input[type=range].progress:focus {
-  outline: none;
-}
+  @import 'track';
+  @import 'thumb';
 
-input[type=range].progress::-webkit-slider-runnable-track {
+  input[type=range].progress {
+    -webkit-appearance: none;
+    width: 100%;
+    margin: 7.3px 0;
+    outline: none;
 
-  width: 100%;
-  height: 11.4px;
-  cursor: pointer;
-  box-shadow: 1px 1px 1px $black, 0px 0px 1px #0d0d0d;
-  background: $progress-bg-2;
-  border-radius: 1.3px;
-  border: 0.2px solid #010101;
-}
+    @extend %webkit-track;
+    @extend %moz-track;
+    @extend %ms-track;
 
-input[type=range].progress::-webkit-slider-thumb {
-  box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
-  border: 1.8px solid #00001e;
-  height: 26px;
-  width: 26px;
-  border-radius: 15px;
-  background: $white;
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: -7.5px;
-}
+    @extend %webkit-thumb;
+    @extend %moz-thumb;
+    @extend %ms-thumb;
+  }
 
-input[type=range].progress:focus::-webkit-slider-runnable-track {
-  background: $progress-bg;
-}
-
-input[type=range].progress::-moz-range-track {
-  width: 100%;
-  height: 11.4px;
-  cursor: pointer;
-  box-shadow: 1px 1px 1px $black, 0px 0px 1px #0d0d0d;
-  background: $progress-bg-2;
-  border-radius: 1.3px;
-  border: 0.2px solid #010101;
-}
-
-input[type=range].progress::-moz-range-thumb {
-  box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
-  border: 1.8px solid #00001e;
-  height: 26px;
-  width: 26px;
-  border-radius: 15px;
-  background: $white;
-  cursor: pointer;
-}
-
-input[type=range].progress::-ms-track {
-  width: 100%;
-  height: 11.4px;
-  cursor: pointer;
-  background: transparent;
-  border-color: transparent;
-  color: transparent;
-}
-
-input[type=range].progress::-ms-fill-lower {
-  background: $progress-bg-3;
-  border: 0.2px solid #010101;
-  border-radius: 2.6px;
-  box-shadow: 1px 1px 1px $black, 0px 0px 1px #0d0d0d;
-}
-
-input[type=range].progress::-ms-fill-upper {
-  background: $progress-bg;
-  border: 0.2px solid #010101;
-  border-radius: 2.6px;
-  box-shadow: 1px 1px 1px $black, 0px 0px 1px #0d0d0d;
-}
-
-input[type=range].progress::-ms-thumb {
-  box-shadow: 0.9px 0.9px 1px #000031, 0px 0px 0.9px #00004b;
-  border: 1.8px solid #00001e;
-  height: 26px;
-  width: 26px;
-  border-radius: 15px;
-  background: $white;
-  cursor: pointer;
-  height: 11.4px;
-}
-
-input[type=range].progress:focus::-ms-fill-lower {
-  background: $progress-bg-2;
-}
-
-input[type=range].progress:focus::-ms-fill-upper {
-  background: $progress-bg;
+  input[type=range].progress:focus {
+    outline: none;
+  }
 }
