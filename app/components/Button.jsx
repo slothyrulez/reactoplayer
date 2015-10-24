@@ -26,7 +26,7 @@ export class Button extends  React.Component {
 
 export class ToggleButton extends  React.Component {
   static propTypes = {
-    onButtonClick: PropTypes.func.isRequired
+    onButtonClick: PropTypes.func.isRequired,
     playing: React.PropTypes.bool.isRequired,
   }
   constructor(props) {
