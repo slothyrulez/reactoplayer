@@ -15,6 +15,7 @@ import Volume from "./Volume.jsx";
 import Visor from "./Visor.jsx";
 import Sound from "./Sound.jsx";
 import Progress from "./Progress.jsx";
+import Wave from "./Wave.jsx";
 import { PlayList } from "./Adts.js";
 
 export default class Player extends React.Component {
@@ -60,6 +61,7 @@ export default class Player extends React.Component {
           playlist={this.props.playlist}
           actualSong={this.props.actualSong} />
         <Visor {...allprops} />
+        <Wave />
         <Sound
           onSongLoad={(data) => this.handleSongLoad(data)}
           onSongProgress={(data) => this.handleSongProgress(data)}
