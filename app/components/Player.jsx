@@ -30,17 +30,27 @@ export default class Player extends React.Component {
     super(props);
     this.className = "player";
     // Load playlist
-    this.props.dispatch(fetchIfNeeddedSongsThunk([]));
+    // this.props.dispatch(fetchIfNeeddedSongsThunk([]));
   }
-  componentDidUpdate(prevProps, prevState){
-    // Data fetch logic start
+  componentWillMount() {
+    console.log(this.props.autoFetch, "AUTOFETCH");
+    if (this.props.autoFetch) {
+      // Data fetch logic start
+      this.props.dispatch(fetchIfNeeddedSongsThunk([]));
+      this.props.dispatch(fetchDataIfNeeddedSongThunk());
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    this.props.dispatch(fetchIfNeeddedSongsThunk([]));
     this.props.dispatch(fetchDataIfNeeddedSongThunk());
   }
   render() {
     let {...allprops} = this.props;
     return (
       <div className={this.className}>
-        <Buttons onButtonClick={(eve, action) => this.handleClickButton(eve, action) } />
+        <Buttons
+          onButtonClick={(eve, action) => this.handleClickButton(eve, action)}
+          playing={this.props.playing} />
         <Volume
           onVolumeChange={(eve) => this.handleVolumeRange(eve)}
           volume={this.props.volume} />
@@ -112,16 +122,13 @@ export default class Player extends React.Component {
   }
 }
 
-
-
-
-
 // Which props do we want to inject, given the global state?
 // Note: use https://github.com/faassen/reselect for better performance.
 function select(state) {
   return {
     volume: state.volume,
     autoPlay: state.autoPlay,
+    autoFetch: state.autoFetch,
     playing: state.playing,
     playlist: state.playlist,
     playPosition: state.playPosition,
@@ -149,6 +156,7 @@ export default connect(select)(Player);
 
 // Global state sxample
 // {
+//   autoFetch: true,
 //   actualSong: 0,
 //   playing: true,
 //   playPosition: 0,
@@ -177,4 +185,3 @@ export default connect(select)(Player);
 //     dataUrl: "",
 //   }]
 // }
-

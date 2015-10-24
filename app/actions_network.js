@@ -5,6 +5,7 @@ import fetch from 'isomorphic-fetch';
 
 // ACTION TYPES
 // NETWORK
+export const AUTO_FETCH = 'AUTO_FETCH';
 export const SONGS_FETCH = 'SONGS_FETCH';
 export const SONGS_ENDFETCH = 'SONGS_ENDFETCH';
 export const SONGS_RECEIVE = 'SONGS_RECEIVE';
@@ -17,6 +18,10 @@ export const SONG_DATA_FETCH_ERR = 'SONG_DATA_FETCH_ERR';
 
 
 // NETWORK FECTH
+export function autoFetch(bool) {
+  return { type: AUTO_FETCH, bool };
+}
+
 export function fetchSongs(bool) {
   return { type: SONGS_FETCH, bool };
 }
@@ -55,7 +60,9 @@ export function errorFetchDataSong(err) {
   return { type: SONG_DATA_FETCH_ERR, err, message: err.message || "SONG_DATA_FETCH_ERR" };
 }
 
+// REST API
 function fetchSongsHelper(songs) {
+  // Fetch songs
   return dispatch => {
     dispatch(fetchSongs(true));
     return fetch(SERVER_URL + SONGS_API_URL, {mode: 'cors'})
@@ -94,7 +101,7 @@ export function fetchIfNeeddedSongsThunk(songs) {
     }
   };
 }
-
+// Sockjs API
 function fetchDataSongHelper(song) {
   return dispatch => {
     if (worker_retrieve_start(song)){
@@ -135,8 +142,8 @@ function shouldFetchDataSong(state) {
   return false
 }
 
-
 export function fetchDataIfNeeddedSongThunk() {
+  // Sockjs
   // Thunk middleware knows how to handle functions.
   // It passes the dispatch method as an argument to the function,
   // thus making it able to dispatch actions itself.
@@ -151,7 +158,6 @@ export function fetchDataIfNeeddedSongThunk() {
 }
 
 // Worker communication
-// var Worker = require('worker!./song_fetcher_worker.js');
 import Worker from "worker!./components/song_fetcher_worker.js";
 var worker = new Worker();
 
@@ -172,8 +178,8 @@ export const fetchDataMiddleware = createOneShot((dispatch) => {
   // runs through redux. Perfect moment to glue things together!
 
   // The worker must be able to dispatch
-  // so message event listener should be defined here
-  // Handles responses from the worker
+  // so message event listener should be defined here handles responses
+  // from the worker
   // Register only once
   worker.addEventListener('message', (e) => {
     let cmd = e.data.cmd;

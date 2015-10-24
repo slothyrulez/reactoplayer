@@ -11,9 +11,10 @@ var common = {
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
+  // cache: false,
   output: {
     path: path.resolve(ROOT_PATH, 'build'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     loaders: [

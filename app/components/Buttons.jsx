@@ -17,8 +17,6 @@ export default class Buttons extends React.Component {
         <Prev {...props} />
         <Next {...props} />
         <VolumeMute {...props} />
-        <VolumeIncrease {...props} />
-        <VolumeDecrease {...props} />
       </div>
     );
   }

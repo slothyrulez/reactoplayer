@@ -10,9 +10,15 @@ const initialState = {
   playlist: [],
   fetching: false,
   fetchingData: false,
-  volume: VOLUME_MIN,
-  autoPlay: true,
+  // volume: VOLUME_MIN,
+  volume: 15,
+  autoPlay: false,
+  autoFetch: true,
 };
+
+function AutoFetchChangeReducer(state, action) {
+  return action.bool;
+}
 
 function AutoPlayChangeReducer(state, action) {
   return !state;
@@ -195,6 +201,10 @@ function PlayerApp(state = initialState, action) {
       return Object.assign({}, state, {
         playPosition: PositionChangeReducer(state.playPosition, action),
       });
+    case network.AUTO_FETCH:
+      return Object.assign({}, state, {
+        autoPlay: AutoPlayChangeReducer(state.autoPlay, action)
+      });
     case network.SONGS_FETCH:
     case network.SONGS_ENDFETCH:
       return Object.assign({}, state, {
@@ -229,7 +239,7 @@ function _findSongByUuid(playlist, uuid) {
 }
 
 function* _songPropsExtender(song){
-  yield Object.assing({}, song, { dataUrl: undefined, fetchedData: false });
+  yield Object.assign({}, song, { dataUrl: undefined, fetchedData: false });
 }
 
 export default PlayerApp;
