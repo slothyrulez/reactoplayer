@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Play, Pause, Stop, Volume, Next, Prev, VolumeMute, VolumeIncrease, VolumeDecrease } from "./SpecializedButtons.jsx";
+import { PlayPauseToggle, Play, Pause, Stop, Volume, Next, Prev, VolumeMute, VolumeIncrease, VolumeDecrease } from "./SpecializedButtons.jsx";
 
 export default class Buttons extends React.Component {
   static PropTypes = {
@@ -13,8 +13,7 @@ export default class Buttons extends React.Component {
     var {...props} = this.props;
     return (
       <div className={this.className}>
-        <Play {...props} />
-        <Pause {...props} />
+        <PlayPauseToggle {...props} />
         <Prev {...props} />
         <Next {...props} />
         <VolumeMute {...props} />

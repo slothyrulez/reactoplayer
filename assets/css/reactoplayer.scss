@@ -42,7 +42,7 @@ $slider-width: 100%;
     display: flex;
     flex-flow: row;
 
-    .button-wrapper {
+    .button-wrapper, .togglebutton-wrapper {
       display: inline-flex;
 
       @extend .btn-wrapper;
@@ -54,15 +54,20 @@ $slider-width: 100%;
 
   .visor {
     display: flex;
+    flex-flow: row;
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: lighter;
   }
 
-  .volume {
+  .volume-wrapper {
     display: flex;
+    flex-flow: row;
+    // .volume {}
   }
-  .progress {
+  .progress-wrapper {
     display: flex;
+    flex-flow: row;
+    // .progress {}
   }
 }
 

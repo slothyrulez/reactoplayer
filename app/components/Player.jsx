@@ -177,3 +177,4 @@ export default connect(select)(Player);
 //     dataUrl: "",
 //   }]
 // }
+

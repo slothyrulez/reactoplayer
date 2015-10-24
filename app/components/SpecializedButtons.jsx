@@ -2,7 +2,16 @@ import React from 'react';
 
 import { VOL_DEC, VOL_INC, VOL_MUTE } from "../actions";
 import { PLAY_SONG, PAUSE_SONG, NEXT_SONG, PREV_SONG } from "../actions";
-import Button from "./Button.jsx";
+import { Button, ToggleButton } from "./Button.jsx";
+
+export class PlayPauseToggle extends ToggleButton {
+  constructor(props) {
+    super(props);
+    this.button_name = "PlayPauseToggle";
+    this.button_actions = [PLAY_SONG, PAUSE_SONG];
+    this.icon_names = ["p_play", "p_pause"];
+  }
+}
 
 export class Play extends Button {
   constructor(props) {
